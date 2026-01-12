@@ -5,6 +5,7 @@ import IntroPage from './page/auth/IntroPage'
 import RegisterPage from './page/auth/RegisterPage'
 
 const App = () => {
+
   return (
     <Routes>
       <Route path='/' element={ <IntroPage/> } />
