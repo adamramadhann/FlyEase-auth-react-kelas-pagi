@@ -3,53 +3,49 @@ import { Link, useNavigate } from 'react-router-dom'
 import InputProps from '../../components/InputProps'
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [repassword, setRepassword] = useState('')
-  const navigate = useNavigate()
+  const [email, setEmail] = useState('udang rebus');
+  const [password, setPassword] = useState('');
+  const [repassword, setRepassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if(email !== '' && password !== '' && password === repassword) {
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
 
-        setEmail('');
-        setPassword('');
-
-        navigate('/login');
+      navigate('/login');
+      window.location.reload();
     } else {
-      console.log({
-        email : email,
-        password : password,
-        repassword : repassword
-      })
-      alert('input email dan password tidak boleh kosong')
+      alert('input email dan input password tidak boleh kosong serta input password harus sama dengan input repassword');
     }
-  } 
+
+  };
 
   return (
     <div className='w-screen h-screen flex items-center justify-center flex-col gap-10 bg-[#4788D7]'>
     <h1 className='text-white text-2xl font-extrabold mb-14'>Sign Up</h1>
-    <form 
+    <form
+      onSubmit={handleSubmit} 
       className='w-[318px] h-auto'
-      onSubmit={handleSubmit}
     >
+  
       <InputProps 
         label={'Email'} 
         typeInput={'text'} 
         placeholderInput={'masukan email'}
         htmlFor={'email'}
+        onChange={(e) => setEmail(e.target.value)}
       />
 
-      {/* password */}
 
       <InputProps 
         label={'Password'} 
         typeInput={'password'} 
         placeholderInput={'masukan password'}
         htmlFor={'password'}
+        onChange={(e) => setPassword(e.target.value)}
       />
 
       <InputProps 
@@ -57,7 +53,10 @@ const RegisterPage = () => {
         typeInput={'password'} 
         placeholderInput={'masukan Repassword'}
         htmlFor={'Repassword'}
+        onChange={(e) => setRepassword(e.target.value)}
       />
+
+
       <button type='submit' className='text-[#4788D7] w-full py-4 bg-white rounded-md text-xl font-bold mt-5' >
         Register
       </button>
